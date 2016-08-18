@@ -26,14 +26,19 @@ def write_png(content, filename, obj)
   IO.write("#{OUTPUT_DIR}/png/#{obj}/#{filename}", image.to_s)
 end
 
-def annotate_png(legend, filename, obj)
+def annotate_png(header, footer, filename, obj)
   png_filename = "#{OUTPUT_DIR}/png/#{obj}/#{filename}"
   image = Magick::Image.read(png_filename).first
-  text = Magick::Draw.new
-  text.font_family = 'helvetica'
-  text.pointsize = 20
-  text.gravity = Magick::SouthGravity
-  text.annotate(image, 0,0,0,0, legend)
+  h = Magick::Draw.new
+  h.font_family = 'helvetica'
+  h.pointsize = 20
+  h.gravity = Magick::NorthGravity
+  h.annotate(image, 0,0,0,0, header)
+  f = Magick::Draw.new
+  f.font_family = 'helvetica'
+  f.pointsize = 20
+  f.gravity = Magick::SouthGravity
+  f.annotate(image, 0,0,0,0, footer)
   image.write(png_filename)
 end
 
@@ -50,20 +55,20 @@ cleanup()
 boxes = load_csv("#{CSV_DIR}/box.csv")
 boxes.each do |b|
   write_png(b[:name], "#{b[:name]}.png", "box")
-  annotate_png("#{b[:name]} | #{b[:vaccine_type]}", "#{b[:name]}.png", "box")
+  annotate_png("", "#{b[:name]} | #{b[:vaccine_type]}", "#{b[:name]}.png", "box")
 end
 write_pdf("box")
 
 shelves = load_csv("#{CSV_DIR}/shelf.csv")
 shelves.each do |b|
   write_png(b[:name], "#{b[:name]}.png", "shelf")
-  annotate_png("#{b[:name]} | #{b[:vaccine_type]}", "#{b[:name]}.png", "shelf")
+  annotate_png("", "#{b[:name]} | #{b[:vaccine_type]}", "#{b[:name]}.png", "shelf")
 end
 write_pdf("shelf")
 
 fridges = load_csv("#{CSV_DIR}/fridge.csv")
 fridges.each do |b|
   write_png(b[:name], "#{b[:name]}.png", "fridge")
-  annotate_png("#{b[:name]}", "#{b[:name]}.png", "fridge")
+  annotate_png("#{b[:location]}", "#{b[:name]}", "#{b[:name]}.png", "fridge")
 end
 write_pdf("fridge")
