@@ -1,0 +1,14 @@
+name,fridge_type,location,n_shelves,owner_name
+fridge-1,minus_80,landreah,2,leo
+fridge-2,minus_80,landreah,2,leo
+fridge-3,minus_80,landreah,2,leo
+fridge-4,minus_80,landreah,2,leo
+fridge-5,2_8,landreah,6,leo
+fridge-6,2_8,landreah,6,leo
+fridge-7,2_8,maferenyah,6,leo
+fridge-8,2_8,maferenyah,6,leo
+fridge-9,credo_cube,transport,3,leo
+fridge-10,credo_cube,transport,3,leo
+fridge-11,credo_cube,transport,3,leo
+fridge-12,stock,landreah,3,leo
+fridge-13,stock,maferenyah,3,leo

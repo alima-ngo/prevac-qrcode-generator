@@ -1,2 +1,4 @@
-output/*
-csv/*
+output/pdf/**
+output/png/box/**
+output/png/fridge/**
+output/png/shelf/**
