@@ -15,7 +15,7 @@ def cleanup
 end
 
 def load_csv(filename)
-  csv = CSV.foreach(filename, col_sep: ',', headers: true, :header_converters => :symbol, :converters => :all)
+  csv = CSV.foreach(filename, col_sep: ',', headers: true, :header_converters => :symbol)
   csv = csv.to_a.map { |row| row.to_hash }
   csv
 end
@@ -62,13 +62,13 @@ write_pdf("box")
 shelves = load_csv("#{CSV_DIR}/shelf.csv")
 shelves.each do |b|
   write_png(b[:name], "#{b[:name]}.png", "shelf")
-  annotate_png("", "#{b[:name]} | #{b[:vaccine_type]}", "#{b[:name]}.png", "shelf")
+  annotate_png("#{b[:fridge_name]}", "#{b[:name]} | #{b[:vaccine_type]}", "#{b[:name]}.png", "shelf")
 end
 write_pdf("shelf")
 
 fridges = load_csv("#{CSV_DIR}/fridge.csv")
 fridges.each do |b|
   write_png(b[:name], "#{b[:name]}.png", "fridge")
-  annotate_png("#{b[:location]}", "#{b[:name]}", "#{b[:name]}.png", "fridge")
+  annotate_png("#{b[:location]}", "#{b[:name]} | #{b[:fridge_type]}", "#{b[:name]}.png", "fridge")
 end
 write_pdf("fridge")
